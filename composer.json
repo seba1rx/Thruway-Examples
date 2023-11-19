@@ -1,0 +1,13 @@
+{
+    "require": {
+        "voryx/thruway": "^0.6.1",
+        "thruway/pawl-transport": "^0.5.2",
+        "seba1rx/sessionadmin": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Demo\\": "Demo/",
+            "MockModel\\": "MockModel/"
+        }
+    }
+}
