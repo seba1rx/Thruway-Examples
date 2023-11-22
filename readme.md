@@ -6,7 +6,7 @@
 
 Please check the original repo [examples](https://github.com/voryx/Thruway/tree/master/Exampleshttps:/) in order to compare this implementation to the original examples.
 
-**This demo consists of:**
+**This demo (demo 1) consists of:**
 
 * Router: based on Examples/SimpleWsRouter.php
 * Realm Authentication: based on Examples/Authentication/SimpleAuthProviderClient.php
@@ -23,6 +23,8 @@ Please check the original repo [examples](https://github.com/voryx/Thruway/tree/
 * internal client 2 using connection object that will be launched by the main app to interface with the router so it can query the loop object, obtain connected users, etc.
 
 ---
+
+### DEMO 1
 
 Open 3 terminals and a browser tab with console in js option (F12 in Chrome, select js tab)
 
@@ -66,6 +68,24 @@ All of these act like a second internal client. the idea is that internal client
 **in browser:** in file index.php in a script tag there is a function defined, in the console in JS tab, call the function
 > runConnectionObjectUsingAjax();
 
+---
+
+### DEMO 2
+
+## Router, internal client 1 and auth provider client in the same router instance
+
+open 1 terminal and run the router like this:
+
+> php bin/RouterWithInternalClient.php
+
+This should start the router creating and addin to the router a transport provider, create and add an auth provider client for the realm, register an authentication manager module in one single file. This is a much more clean implementation.
+
+The idea in this example (demo 2) is:
+
+-The client 1 (the one attached to the router) will be registering RPC methods
+-The browser will make an XHR (using jquery ajax) to run the connection object (client 2), the connection object will make the RPC call to the methods registered by the client 1.
+
+I added a convenient button in the index.php so you can click it to make the XHR.
 ---
 
 I'll be adding more functionality to this example.

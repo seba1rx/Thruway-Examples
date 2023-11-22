@@ -11,6 +11,12 @@
 <body>
   Open the console to see the messages.
 
+  <br>
+  <br>
+  <br>
+
+  <button type="button" onclick="runConnectionObjectUsingAjax();"> Call connection object using ajax</button>
+
   <script>
     function runConnectionObjectUsingAjax() {
 
