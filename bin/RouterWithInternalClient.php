@@ -19,7 +19,7 @@ $theRealm = [
 $transportProvider = new \Thruway\Transport\RatchetTransportProvider("127.0.0.1", 9090);
 
 /**
- * Creates an authorization provider so the server is not open to anyone tryng to connect
+ * Creates an authorization provider so the server is not open to anyone trying to connect
  * Set a password to the main realm, so new connections can authenticate
  */
 $realmAuthProvider = new AuthProviderClient([$theRealm["name"]], $loop);
