@@ -18,8 +18,8 @@ Please check the original repo [examples](https://github.com/voryx/Thruway/tree/
 
 * to have a router
 * realm authentication
-* internal client 1 registering RCP methods that interface with the main app
-* js client based on autobahn.js so browser clients can connect and make RCP calls
+* internal client 1 registering RPC methods that interface with the main app
+* js client based on autobahn.js so browser clients can connect and make RPC calls
 * internal client 2 using connection object that will be launched by the main app to interface with the router so it can query the loop object, obtain connected users, etc.
 
 ---
