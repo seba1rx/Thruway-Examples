@@ -38,7 +38,6 @@ class SimpleClientAuth implements \Thruway\Authentication\ClientAuthenticationIn
     public function getAuthMethods()
     {
         return ["simplysimple"];
-        // TODO: Implement getAuthMethods() method.
     }
 
     /**
