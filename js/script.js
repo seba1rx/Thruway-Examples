@@ -23,14 +23,15 @@ var connection = new autobahn.Connection({
 
   connection.onopen = function(session) {
     console.log("Successfully made the socket connection.");
+    console.log("calling getfreeSpace and getMockData, please wait...");
 
     //call a remote procedure
-    connection.session.call('com.example.getfreespace', []).then(
+    connection.session.call('com.example.getfreeSpace', []).then(
       function(res) {
         console.log("Result:", res);
       },
       function(error) {
-        console.log("RPC Call Failure: " + error);
+        console.log("RPC Call Failure: " + error.error);
       }
     );
 
@@ -39,10 +40,11 @@ var connection = new autobahn.Connection({
         console.log("Result:", res);
       },
       function(error) {
-        console.log("RPC Call Failure: " + error);
+        console.log("RPC Call Failure: " + error.error);
       }
     );
 
+    // // demo, this won't work
     // connection.session.call('com.example.sendMail', ['demo@mail.com', 'my subject', 'my body']).then(
     //   function(res) {
     //     console.log("Result:", res);

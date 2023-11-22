@@ -12,13 +12,15 @@
   Open the console to see the messages.
 
   <script>
-    function callHandler() {
+    function runConnectionObjectUsingAjax() {
 
+      console.log('calling bin/launchInternalClientAsConnectionObject.php using jquery ajax, please wait...');
       $.ajax({
-        url: '/bin/launchInternalHandler.php',
-        async: false,
+        url: 'bin/launchInternalClientAsConnectionObject.php',
+        // async: false,
+        dataType: 'json',
         success: function (response) {
-          console.log('respuesta: ' + response);
+          console.log('respuesta: ', response);
         }
       });
 

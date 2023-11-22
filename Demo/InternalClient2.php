@@ -4,7 +4,7 @@ namespace Demo;
 
 /**
  * this is the internal client 2, this class should be used
- * to call RCP functions registered by the internal client 1
+ * to call RPC functions registered by the internal client 1
  *
  * this client when started with bin/launchInternalClient2.php
  * will use SimpleClientAuth.php to authenticate
@@ -27,14 +27,14 @@ class InternalClient2 extends \Thruway\Peer\Client
         $this->mySession = $session;
         $this->myTransport = $transport;
 
-        $this->callRCPMethod('com.example.getfreespace');
-        $this->callRCPMethod('com.example.getMockData');
+        $this->callRPCMethod('com.example.getfreespace');
+        $this->callRPCMethod('com.example.getMockData');
 
     }
 
-    private function callRCPMethod($RCP, $args = null)
+    private function callRPCMethod($RPC, $args = null)
     {
-        return $this->mySession->call($RCP, $args);
+        return $this->mySession->call($RPC, $args);
     }
 
 }

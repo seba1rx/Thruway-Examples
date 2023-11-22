@@ -18,8 +18,8 @@ Please check the original repo [examples](https://github.com/voryx/Thruway/tree/
 
 * to have a router
 * realm authentication
-* internal client 1 registering RCP methods that interface with the main app
-* js client based on autobahn.js so browser clients can connect and make RCP calls
+* internal client 1 registering RPC methods that interface with the main app
+* js client based on autobahn.js so browser clients can connect and make RPC calls
 * internal client 2 using connection object that will be launched by the main app to interface with the router so it can query the loop object, obtain connected users, etc.
 
 ---
@@ -30,40 +30,44 @@ navigate to root dir, at the same level of composer.json,
 so if you do ls/dir command, you should see composer.json
 
 
-in terminal 1:
+**in terminal 1:**
 
 > php bin/SimpleWsRouter.php
 
 This will launch the router, add auth manager and auth client, and add transport provider.
 
 
-in terminal 2:
+**in terminal 2:**
 
 > php bin/launchInternalClient.php
 
 This will start the internal client using an instance of the InternalClient.php, using a client authenticator to enter the realm.
 
 
-in terminal 3, choose one of the following, but try them all at least once:
+**in terminal 3**, choose one of the following, but try them all at least once:
 
 All of these act like a second internal client. the idea is that internal client 2 can be used by the main app to interface with the WAMP server.
 
 
-option 1, using use Thruway\Connection object:
+**option 1**, using use Thruway\Connection object:
 
 > php bin/launchInternalClientAsConnectionObject.php
 
 
-option 2, using Thruway\Peer\Client object:
+**option 2**, using Thruway\Peer\Client object:
 
 > php bin/launchInternalClientAsClientObject.php
 
 
-option 3 using Thruway\Peer\Client subclass:
+**option 3** using Thruway\Peer\Client subclass:
 
 > php bin/launchInternalCLient2.php
 
+**in browser:** in file index.php in a script tag there is a function defined, in the console in JS tab, call the function
+> runConnectionObjectUsingAjax();
 
 ---
+
+I'll be adding more functionality to this example.
 
 If you find any bug, or you want to contribute adding more functionality just let me know

@@ -4,22 +4,28 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Thruway\ClientSession;
 use Thruway\Connection;
+use Psr\Log\NullLogger;     // used to prevent logger to output stuff
+use Thruway\Logging\Logger; // used to prevent logger to output stuff
+
+Logger::set(new NullLogger()); // shush the logger so it doesn't pollute the output of this example
 
 /**
  * this is a procedural client you can place between any code in your main app
  *
  * this acts like internal client 2
  *
- * this can be used to make RCP calls
+ * this can be used to make RPC calls
  *
- * the InternalClient.php will be registering RCP functions you can call from index.php or from here
+ * the InternalClient.php will be registering RPC functions you can call from index.php or from here
  *
  * this procedural code is intended to be a mirror of an autobahn.js implementation, in fact, just take a look at js/script.js
  *
  */
 
+
 $onClose = function ($msg) {
-    echo $msg;
+    // echo $msg;
+
 };
 
 $onChallenge = function($method){
@@ -55,50 +61,60 @@ $connection = new Connection(
  * TL;DR: client connects, makes RPC call, gets data, disconnects
  */
 
-$data = [];
-
-$connection->on(
-    'open',
-    function (ClientSession $session) use ($connection, $data){
-
-        $session->call('com.example.getfreespace', null)->then(
-            function ($res) use ($connection, $data){
-                // echo "Result: {$res}\n";
-
-                $data['getfreespace'] = $res;
-
-                $connection->close();
-            },
-            function ($error) use ($connection, $data){
-                // echo "Call Error: {$error}\n";
-
-                $data['error'] = $error;
-
-                $connection->close();
-            }
-        );
-
-        $session->call('com.example.getMockData', null)->then(
-            function ($res) use ($connection, $data){
-                // echo "Result: {$res}\n";
-
-                $data['getMockData'] = $res;
-
-                $connection->close();
-            },
-            function ($error) use ($connection, $data){
-                // echo "Call Error: {$error}\n";
-
-                $data['error'] = $error;
-
-                $connection->close();
-            }
-        );
-    }
-
-);
-
-$connection->open();
+try{
 
 
+    $data = [];
 
+    /**
+     * we want to close connection after the RPC calls in order to return $data, but
+     * since this demo is making 2 RPC, we close connection in the second call
+     */
+
+    $connection->on(
+        'open',
+        function (ClientSession $session) use ($connection, &$data){
+
+            $session->call('com.example.getMockData', null)->then(
+                function ($res) use ($connection, &$data){
+                    // echo "Result: {$res}\n";
+
+                    $data['getMockData'] = $res[0];
+
+                    // $connection->close();
+                },
+                function ($error) use ($connection, &$data){
+                    // echo "Call Error: {$error}\n";
+
+                    $data['error'] = $error;
+
+                    $connection->close();
+                }
+            );
+
+            $session->call('com.example.getFreeSpace', null)->then(
+                function ($res) use ($connection, &$data){
+                    // echo "Result: {$res}\n";
+
+                    $data['getFreeSpace'] = $res[0];
+
+                    $connection->close();
+                },
+                function ($error) use ($connection, &$data){
+                    // echo "Call Error: {$error}\n";
+
+                    $data['error'] = $error;
+
+                    $connection->close();
+                }
+            );
+        }
+    );
+
+    $connection->open();
+    echo json_encode($data);
+
+}catch(\Exception $e){
+
+    echo json_encode(["error" => "server is down or too much time to execute, sorry"]);
+}

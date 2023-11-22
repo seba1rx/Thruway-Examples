@@ -53,8 +53,8 @@ class InternalClient extends \Thruway\Peer\Client
     {
         $session->register('com.example.getfreespace', [$this, 'getFreeSpace']);
         $session->register('com.example.getMockData', [$this, 'getMockData']);
-        // $session->register('com.example.sendMail', [$this, 'sendMail']); //RCP example
-        // $session->register('com.example.getSomeDataFromApp', [$this, 'getSomeDataFromApp']); //RCP example
+        // $session->register('com.example.sendMail', [$this, 'sendMail']); //RPC example
+        // $session->register('com.example.getSomeDataFromApp', [$this, 'getSomeDataFromApp']); //RPC example
     }
 
 }
