@@ -1,13 +1,19 @@
 <?php
 
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
 
 use Thruway\Peer\Router;
 use Thruway\Transport\RatchetTransportProvider;
-use Demo\SimpleAuthProviderClient;
+use DEMO1\SimpleAuthProviderClient;
+
+
+/**
+ * this script is based on:
+ * https://github.com/voryx/Thruway/blob/master/Examples/Authentication/StartRouter.php
+ *
+ */
 
 $router = new Router();
-$loop = $router->getLoop(); //so far not used
 
 $router->registerModule(new \Thruway\Authentication\AuthenticationManager());
 

@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 use Thruway\ClientSession;
 use Thruway\Connection;
@@ -50,9 +50,7 @@ $connection = new Connection(
 
 /**
  * please note that if you want to keep the client connected
- * you have to delete $connection->close()
- *
- * this is not the case, since we want to execute this code to make the RPC call and obtain the response.
+ * you have to delete $connection->close(). This is not the case, since we want to execute this code to make the RPC call and obtain the response.
  * An example scenario would be to make an XHR request from the browser using something like jquery ajax, then
  * a file containing this code will act as a client connecting to the router and make the RPC call, obtaining
  * whaterver data you need, then disconnect and return the obtained data. If you delete $connection->close()

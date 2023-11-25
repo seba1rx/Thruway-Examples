@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo;
+namespace DEMO2;
 
 use MockModel\MyMockModel;
 // use MyApp\Models\MyModel;
@@ -19,7 +19,7 @@ class InternalClient extends \Thruway\Peer\Client
      */
     public function getFreeSpace()
     {
-        return ["Free space: " . (string)disk_free_space('/')]; // use c: for you windowers
+        return ["Free space: " . (string)disk_free_space('/')]; // wsl or linux
         // return [disk_free_space('c:')]; // use c: for you windowers
     }
 

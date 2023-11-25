@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo;
+namespace DEMO1;
 
 /**
  * this is the internal client 2, this class should be used

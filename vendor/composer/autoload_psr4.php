@@ -29,5 +29,7 @@ return array(
     'MockModel\\' => array($baseDir . '/MockModel'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'Evenement\\' => array($vendorDir . '/evenement/evenement/src'),
-    'Demo\\' => array($baseDir . '/Demo'),
+    'DEMO3\\' => array($baseDir . '/DEMO3'),
+    'DEMO2\\' => array($baseDir . '/DEMO2'),
+    'DEMO1\\' => array($baseDir . '/DEMO1'),
 );

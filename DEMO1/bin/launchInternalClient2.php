@@ -1,9 +1,9 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
-use Demo\InternalClient2;
-use Demo\SimpleClientAuth;
+use DEMO1\InternalClient2;
+use DEMO1\SimpleClientAuth;
 
 $client2 = new InternalClient2('somerealm');
 

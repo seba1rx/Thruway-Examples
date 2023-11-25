@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo;
+namespace DEMO3;
 
 use Thruway\Logging\Logger;
 

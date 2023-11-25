@@ -1,11 +1,11 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 use Thruway\ClientSession;
 use Thruway\Peer\Client as ThruwayPeerClient;
 use Thruway\Transport\PawlTransportProvider;
-use Demo\SimpleClientAuth;
+use DEMO1\SimpleClientAuth;
 
 /**
  * this acts like an internal client 2 using a procedural style

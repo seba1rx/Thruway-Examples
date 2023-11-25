@@ -1,9 +1,9 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../../vendor/autoload.php";
 
-use Demo\InternalClient;
-use Demo\AuthProviderClient;
+use DEMO2\InternalClient;
+use DEMO2\AuthProviderClient;
 
 $router = new \Thruway\Peer\Router();
 $loop = $router->getLoop();
@@ -37,17 +37,17 @@ $internalClient = new InternalClient($theRealm["name"], $loop);
 $router->registerModule(new \Thruway\Authentication\AuthenticationManager());
 
 /**
- * adds transport provider in router
+ * adds transport provider to router
  */
 $router->registerModule($transportProvider);
 
 /**
- * adds auth provider client in router
+ * adds auth provider client to router
  */
 $router->addInternalClient($realmAuthProvider);
 
 /**
- * adds internal client in router
+ * adds internal client to router
  */
 $router->addInternalClient($internalClient);
 

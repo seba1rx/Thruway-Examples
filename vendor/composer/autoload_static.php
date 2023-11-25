@@ -65,7 +65,9 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         ),
         'D' => 
         array (
-            'Demo\\' => 5,
+            'DEMO3\\' => 6,
+            'DEMO2\\' => 6,
+            'DEMO1\\' => 6,
         ),
     );
 
@@ -165,9 +167,17 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         array (
             0 => __DIR__ . '/..' . '/evenement/evenement/src',
         ),
-        'Demo\\' => 
+        'DEMO3\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/Demo',
+            0 => __DIR__ . '/../..' . '/DEMO3',
+        ),
+        'DEMO2\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/DEMO2',
+        ),
+        'DEMO1\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/DEMO1',
         ),
     );
 

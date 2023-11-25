@@ -14,19 +14,23 @@
   <br>
   <br>
   <br>
-
+  
   <button type="button" onclick="runConnectionObjectUsingAjax();"> Call connection object using ajax</button>
+  <br>
+  <br>
+  <button type="button" onclick="location.href = 'metaevents.php';">Go to DEMO3</button>
 
   <script>
     function runConnectionObjectUsingAjax() {
 
-      console.log('calling bin/launchInternalClientAsConnectionObject.php using jquery ajax, please wait...');
+      console.log('calling DEMO2/bin/launchInternalClientAsConnectionObject.php using jquery ajax, please wait...');
+      console.log('this will also work for DEMO1');
       $.ajax({
-        url: 'bin/launchInternalClientAsConnectionObject.php',
+        url: 'DEMO2/bin/launchInternalClientAsConnectionObject.php',
         // async: false,
         dataType: 'json',
         success: function (response) {
-          console.log('respuesta: ', response);
+          console.log('response: ', response);
         }
       });
 

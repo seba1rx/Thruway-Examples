@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo;
+namespace DEMO3;
 
 use MockModel\MyMockModel;
 
@@ -32,12 +32,13 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function onSessionStart($session, $transport)
     {
-        // TODO: now that the session has started, setup the stuff
         echo "--------------- Hello from InternalClient ------------\n";
         $session->register('com.example.getphpversion', [$this, 'getPhpVersion']);
         $session->register('com.example.getonline',     [$this, 'getOnline']);
         $session->register('com.example.getfreespace', [$this, 'getFreeSpace']);
         $session->register('com.example.getMockData', [$this, 'getMockData']);
+        $session->register('com.example.isTheUserConnected', [$this, 'isTheUserConnected']);
+        $session->register('com.example.ws_login', [$this, 'ws_login']);
 
         $session->subscribe('wamp.metaevent.session.on_join',  [$this, 'onSessionJoin']);
         $session->subscribe('wamp.metaevent.session.on_leave', [$this, 'onSessionLeave']);
@@ -58,7 +59,7 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function getFreeSpace()
     {
-        return ["Free space: " . (string)disk_free_space('/')]; // use c: for you windowers
+        return ["Free space: " . (string)disk_free_space('/')];
         // return [disk_free_space('c:')]; // use c: for you windowers
     }
 
@@ -71,7 +72,7 @@ class InternalClient3 extends \Thruway\Peer\Client
     }
 
     /**
-     * Get list online
+     * Get online connections
      *
      * @return array
      */
@@ -83,17 +84,18 @@ class InternalClient3 extends \Thruway\Peer\Client
     /**
      * looks for a user_id in $this->_sessions
      *
-     * @param $user_id    the id from users database
+     * @param array $args
      * @return array
      */
-    public function isTheUserConnected($user_id)
+    public function isTheUserConnected($args)
     {
-        // todo: improve the storing logic so clients are grouped by keys using the realm name (realmName1 => [sessions], realmName2 => [sessions] , ...)
         $is_connected = false;
-        foreach($this->_sessions as $ws_id => $ws_data){
-            if($ws_data['user_id'] == $user_id){
-                $is_connected = true;
-                break;
+        if(isset($args[0]) && is_int($args[0])){
+            foreach($this->_sessions as $ws_id => $ws_data){
+                if($ws_data['user_id'] == $args[0]){
+                    $is_connected = true;
+                    break;
+                }
             }
         }
 
@@ -103,16 +105,15 @@ class InternalClient3 extends \Thruway\Peer\Client
     /**
      * fills the $this->_sessions user_id null field set in onSessionJoin with the user_id
      *
-     * @param $user_id            the id from users database
-     * @param $ws_session_id      the id obtained when browser client connects to router
+     * @param array $args
      * @return array
      */
-    public function ws_login($user_id, $ws_session_id)
+    public function ws_login($args)
     {
         $marked = false;
         foreach($this->_sessions as $ws_id => $ws_data){
-            if($ws_id == $ws_session_id){
-                $this->_sessions[$ws_id]['user_id'] = $user_id;
+            if($ws_id == $args[1]){
+                $this->_sessions[$ws_id]['user_id'] = $args[0];
                 $marked = true;
                 break;
             }

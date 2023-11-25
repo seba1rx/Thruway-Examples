@@ -22,7 +22,7 @@ var connection = new autobahn.Connection({
   });
 
   connection.onopen = function(session) {
-    console.log("Successfully made the socket connection.");
+    console.log("Successfully made the socket connection. id: ", session._id);
     console.log("calling getfreeSpace and getMockData, please wait...");
 
     //call a remote procedure

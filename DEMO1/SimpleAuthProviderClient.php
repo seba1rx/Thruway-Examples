@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo;
+namespace DEMO1;
 
 /**
  * Class SimpleAuthProviderClient

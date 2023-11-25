@@ -6,7 +6,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Demo\\": "Demo/",
+            "DEMO1\\": "DEMO1/",
+            "DEMO2\\": "DEMO2/",
+            "DEMO3\\": "DEMO3/",
             "MockModel\\": "MockModel/"
         }
     }
