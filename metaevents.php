@@ -49,7 +49,7 @@ $users = MyMockModel::showUsers();
         // var wamp_host_name = "127.0.0.1";
 
         $.ajax({
-            url: 'http://' + wamp_host_name + '/Demo/loginController.php',
+            url: 'http://' + wamp_host_name + '/DEMO3/loginController.php',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -62,6 +62,7 @@ $users = MyMockModel::showUsers();
 
                 console.log('credentials are ok');
                 user_id = response.user_id;
+                alert(JSON.stringify(response)); // this alert will interrupt execution so we can see the response, click ok and it will redirect to wellcome (if all is ok)
                 location.href = 'welcome.php';
 
                 }else{

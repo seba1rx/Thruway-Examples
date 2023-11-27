@@ -43,4 +43,14 @@ class MyMockModel
         return self::$myMockUsersDB;
     }
 
+    public static function getUserById(int $user_id): array|false
+    {
+        foreach(self::$myMockUsersDB as $row){
+            if($row['user_id'] == $user_id){
+                return $row;
+            }
+        }
+        return false;
+    }
+
 }

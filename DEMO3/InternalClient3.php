@@ -3,6 +3,7 @@
 namespace DEMO3;
 
 use MockModel\MyMockModel;
+use Thruway\Logging\Logger;
 
 /**
  * Class InternalClient3 based on Examples/MetaEvent/InternalClient.php
@@ -32,7 +33,16 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function onSessionStart($session, $transport)
     {
-        echo "--------------- Hello from InternalClient ------------\n";
+        Logger::debug($this, "--------------- Hello from InternalClient ------------");
+        Logger::debug($this, "registering getphpversion");
+        Logger::debug($this, "registering getonline");
+        Logger::debug($this, "registering getfreespace");
+        Logger::debug($this, "registering getMockData");
+        Logger::debug($this, "registering isTheUserConnected");
+        Logger::debug($this, "registering ws_login");
+        Logger::debug($this, "listenint for wamp.metaevent.session.on_join events");
+        Logger::debug($this, "listening for wamp.metaevent.session.on_leave events");
+
         $session->register('com.example.getphpversion', [$this, 'getPhpVersion']);
         $session->register('com.example.getonline',     [$this, 'getOnline']);
         $session->register('com.example.getfreespace', [$this, 'getFreeSpace']);
@@ -59,6 +69,7 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function getFreeSpace()
     {
+        Logger::debug($this, "internal client: managing RPC getFreeSpace");
         return ["Free space: " . (string)disk_free_space('/')];
         // return [disk_free_space('c:')]; // use c: for you windowers
     }
@@ -68,6 +79,7 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function getMockData(): array
     {
+        Logger::debug($this, "internal client: managing RPC getMockData");
         return MyMockModel::getMyMockData();
     }
 
@@ -78,6 +90,7 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function getOnline()
     {
+        Logger::debug($this, "internal client: managing RPC getOnline");
         return [$this->_sessions];
     }
 
@@ -110,10 +123,13 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function ws_login($args)
     {
+        Logger::debug($this, "internal client: managing RPC ws_login, args: " . json_encode($args));
         $marked = false;
+        $array_args = self::toArray($args[0]);
         foreach($this->_sessions as $ws_id => $ws_data){
-            if($ws_id == $args[1]){
-                $this->_sessions[$ws_id]['user_id'] = $args[0];
+            if($ws_id == $array_args['ws_session_id']){
+                $this->_sessions[$ws_id]['user_id'] = $array_args['user_id'];
+                $this->_sessions[$ws_id]['user_data'] = MyMockModel::getUserById($array_args['user_id']);
                 $marked = true;
                 break;
             }
@@ -121,7 +137,12 @@ class InternalClient3 extends \Thruway\Peer\Client
 
         if($marked){
             return [
-                "ws_session_data" => $this->_sessions[$ws_id]
+                "ws_session_data" => $this->_sessions[$ws_id],
+                "callback" => [
+                    "is_rpc" => true,
+                    "method" => "com.example.getonline",
+                    //"args" => [],
+                ],
             ];
         }else{
             // something went wrong
@@ -143,11 +164,12 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function onSessionJoin($args, $kwArgs, $options)
     {
+        Logger::debug($this, "internal client: event onSessionJoin");
         $data = self::toArray($args);
         $ws_session_id = $data[0]["session"];
         $realm = $data[0]["realm"];
 
-        echo "Session {$data[0]['session']} joinned\n";
+        Logger::debug($this, "Session {$data[0]['session']} joinned");
         $this->_sessions[$ws_session_id] = [
             "ws_session_id" => $ws_session_id,
             "realm" => $realm,
@@ -166,14 +188,15 @@ class InternalClient3 extends \Thruway\Peer\Client
      */
     public function onSessionLeave($args, $kwArgs, $options)
     {
+        Logger::debug($this, "internal client: event onSessionLeave");
         $data = self::toArray($args);
         $ws_session_id = $data[0]["session"];
 
         if (!empty($ws_session_id)) {
 
-            foreach($this->_sessions as $ws_session_id => $ws_session_data){
-                if($ws_session_id == $ws_session_data["ws_session_id"]){
-                    echo "Session {$ws_session_id} leaved\n";
+            foreach($this->_sessions as $_session_id => $_session_data){
+                if($ws_session_id == $_session_id){
+                    Logger::debug($this, "Session {$ws_session_id} leaved");
                     unset ($this->_sessions[$ws_session_id]);
                     return;
                 }
@@ -181,6 +204,9 @@ class InternalClient3 extends \Thruway\Peer\Client
         }
     }
 
+    /**
+     * @param object|string $object
+     */
     private static function toArray($object)
     {
         return json_decode(json_encode($object), true);

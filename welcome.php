@@ -36,7 +36,7 @@ if(!$_SESSION['urlIsAllowedToLoad']){
     <script src="js/autobahn.min.js"></script>
     <script src="js/simpleBrowserClient.js"></script>
     <script>
-        connect();
+        connect(<?php echo $_SESSION['id_user'] ?>);
     </script>
 </body>
 </html>
