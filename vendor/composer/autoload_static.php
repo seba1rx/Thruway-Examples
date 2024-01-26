@@ -14,6 +14,8 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
+        'cea474b4340aa9fa53661e887a21a316' => __DIR__ . '/..' . '/react/promise-stream/src/functions_include.php',
+        'ebf8799635f67b5d7248946fe2154f4a' => __DIR__ . '/..' . '/ringcentral/psr7/src/functions_include.php',
         '972fda704d680a3a53c68e34e193cb22' => __DIR__ . '/..' . '/react/promise-timer/src/functions_include.php',
         '3be16222a6efa6dd226a219eaaff823b' => __DIR__ . '/..' . '/ratchet/pawl/src/functions_include.php',
     );
@@ -34,11 +36,16 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         ),
         'R' => 
         array (
+            'Rx\\Websocket\\' => 13,
+            'Rx\\Thruway\\' => 11,
             'Rx\\' => 3,
+            'RingCentral\\Psr7\\' => 17,
             'React\\Stream\\' => 13,
             'React\\Socket\\' => 13,
             'React\\Promise\\Timer\\' => 20,
+            'React\\Promise\\Stream\\' => 21,
             'React\\Promise\\' => 14,
+            'React\\Http\\' => 11,
             'React\\EventLoop\\' => 16,
             'React\\Dns\\' => 10,
             'React\\Cache\\' => 12,
@@ -59,12 +66,17 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         array (
             'GuzzleHttp\\Psr7\\' => 16,
         ),
+        'F' => 
+        array (
+            'Fig\\Http\\Message\\' => 17,
+        ),
         'E' => 
         array (
             'Evenement\\' => 10,
         ),
         'D' => 
         array (
+            'DEMO6\\' => 6,
             'DEMO3\\' => 6,
             'DEMO2\\' => 6,
             'DEMO1\\' => 6,
@@ -103,9 +115,22 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
+        'Rx\\Websocket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rx/websocket/src',
+        ),
+        'Rx\\Thruway\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rx/thruway-client/src',
+        ),
         'Rx\\' => 
         array (
             0 => __DIR__ . '/..' . '/seba1rx/sessionadmin/src',
+            1 => __DIR__ . '/..' . '/reactivex/rxphp/src',
+        ),
+        'RingCentral\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ringcentral/psr7/src',
         ),
         'React\\Stream\\' => 
         array (
@@ -119,9 +144,17 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         array (
             0 => __DIR__ . '/..' . '/react/promise-timer/src',
         ),
+        'React\\Promise\\Stream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise-stream/src',
+        ),
         'React\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/react/promise/src',
+        ),
+        'React\\Http\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/http/src',
         ),
         'React\\EventLoop\\' => 
         array (
@@ -163,9 +196,17 @@ class ComposerStaticInitabd4a51259479d1cfbd8b1f53e833cc9
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
+        'Fig\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fig/http-message-util/src',
+        ),
         'Evenement\\' => 
         array (
             0 => __DIR__ . '/..' . '/evenement/evenement/src',
+        ),
+        'DEMO6\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/DEMO6',
         ),
         'DEMO3\\' => 
         array (

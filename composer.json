@@ -2,13 +2,15 @@
     "require": {
         "voryx/thruway": "^0.6.1",
         "thruway/pawl-transport": "^0.5.2",
-        "seba1rx/sessionadmin": "dev-main"
+        "seba1rx/sessionadmin": "dev-main",
+        "rx/thruway-client": "^3.3"
     },
     "autoload": {
         "psr-4": {
             "DEMO1\\": "DEMO1/",
             "DEMO2\\": "DEMO2/",
             "DEMO3\\": "DEMO3/",
+            "DEMO6\\": "DEMO6/",
             "MockModel\\": "MockModel/"
         }
     }

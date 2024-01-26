@@ -15,7 +15,7 @@ class SessionAdmin{
     private $uniqueId;
     private $sessionName = 'demo_Session';
     private $breadcrumbs = [];
-    private $allowedUrls = ['index.php'];
+    private $allowedUrls = ['index.php', 'welcome.php'];
     private $keys = [];
 
     /**
@@ -24,7 +24,6 @@ class SessionAdmin{
      * usage demo:
      * $conf = [
      *     "sessionLifetime" => 3600,
-     *     "sessionName" => "myAppName_",
      *     "allowedURLs" => ["index.php", "legal.php", "contact_us.php", "our_history.php", "products_and_plans.php"],
      *     "keys" => [
      *         // "some_key" => "some_value",
@@ -36,13 +35,9 @@ class SessionAdmin{
      *
      * @param array $conf
      */
-    public function __constructor(array $conf = []){
+    public function __construct(array $conf = []){
         if(isset($conf["sessionLifetime"])){
             $this->sessionLifetime = $conf["sessionLifetime"];
-        }
-
-        if(isset($conf["sessionName"])){
-            $this->sessionName = $conf["sessionName"];
         }
 
         if(isset($conf["allowedURLs"])){
@@ -57,11 +52,6 @@ class SessionAdmin{
             }
         }
     }
-    // public function __constructor(array $allowed){
-    //     foreach($allowed as $page){
-    //         $this->allowedUrls[] = $page;
-    //     }
-    // }
 
     /**
      * fn activateSession:
@@ -83,6 +73,12 @@ class SessionAdmin{
         }
 
         $this->checkIfUrlIsAllowed();
+
+        foreach($this->keys as $key => $item){
+            if(!isset($_SESSION[$key])){
+                $_SESSION[$key] = $item;
+            }
+        }
     }
 
     /**
